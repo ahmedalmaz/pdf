@@ -24,7 +24,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
   @override
   void initState() {
     super.initState();
-    _handleLoadFromUrl();
+    
     _pdfManager = PDFManager();
     _questionManager = QuestionManager();
     _pageChangeController = PageChangeController(
@@ -32,6 +32,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
       onPageChanged: (_) => setState(() {}),
       onError: (error) => SnackBarService.showError(context, error),
     );
+    _handleLoadFromUrl();
   }
 
   @override
