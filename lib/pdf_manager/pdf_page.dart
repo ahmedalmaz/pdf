@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../pdf_manager_libs.dart';
 
 class PDFViewerScreen extends StatefulWidget {
-  const PDFViewerScreen({super.key});
-
+  const PDFViewerScreen({super.key,required this.link});
+  final String link;
   @override
   State<PDFViewerScreen> createState() => _PDFViewerScreenState();
 }
@@ -24,6 +24,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
   @override
   void initState() {
     super.initState();
+    _handleLoadFromUrl();
     _pdfManager = PDFManager();
     _questionManager = QuestionManager();
     _pageChangeController = PageChangeController(
@@ -46,7 +47,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
   }
 
   void _handleLoadFromUrl() {
-    final url = _urlController.text.trim();
+    final url = widget.link;
     if (url.isEmpty) {
       SnackBarService.showWarning(context, 'Please enter a valid URL');
       return;
@@ -87,7 +88,7 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
       ),
       body: Column(
         children: [
-          _buildControls(),
+          // _buildControls(),
           Expanded(
             child: _pdfController != null
                 ? _buildPdfViewer()
@@ -139,32 +140,32 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
       color: Colors.grey[100],
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _urlController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter PDF URL',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: _handleLoadFromUrl,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _navyColor,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text('Load'),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: TextField(
+          //         controller: _urlController,
+          //         decoration: const InputDecoration(
+          //           hintText: 'Enter PDF URL',
+          //           border: OutlineInputBorder(),
+          //           contentPadding: EdgeInsets.symmetric(
+          //             horizontal: 12,
+          //             vertical: 8,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(width: 8),
+          //     ElevatedButton(
+          //       onPressed: _handleLoadFromUrl,
+          //       style: ElevatedButton.styleFrom(
+          //         backgroundColor: _navyColor,
+          //         foregroundColor: Colors.white,
+          //       ),
+          //       child: const Text('Load'),
+          //     ),
+          //   ],
+          // ),
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
